@@ -1,0 +1,34 @@
+package fr.eitelalaric.gestiondestock.exception;
+
+public enum ErrorCodes {
+    PRODUCT_NOT_FOUND(1000),
+    ARTICLE_NOT_VALID(1001),
+    CATEGORY_NOT_FOUND(2000),
+    CATEGORY_NOT_VALID(2001),
+    CLIENT_NOT_FOUND(3000),
+    CLIENT_NOT_VALID(3001),
+    COMMAND_CLIENT_NOT_FOUND(4000),
+    COMMAND_PROVIDER_NOT_FOUND(5000),
+    COMMAND_PROVIDER_NOT_VALID(5001),
+    COMPANY_NOT_FOUND(6000),
+    COMPANY_NOT_VALID(6001),
+    PROVIDER_NOT_FOUND(7000),
+    PROVIDER_NOT_VALID(7001),
+    LIGNE_COMMANDE_CLIENT_NOT_FOUND(8000),
+    LIGNE_COMMANDE_PROVIDER_NOT_FOUND(9000),
+    LIGNE_VENTE_NOT_FOUND(10000),
+    MVT_STK_NOT_FOUND(11000),
+    USER_NOT_FOUND(12000),
+    USER_NOT_VALID(12001),
+    VENTE_NOT_FOUND(13000),
+    VENTE_NOT_VALID(13001);
+    private int code;
+
+    ErrorCodes(int code) {
+        this.code = code;
+    }
+
+    public int getCode() {
+        return code;
+    }
+}
