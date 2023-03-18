@@ -1,8 +1,10 @@
 package fr.eitelalaric.gestiondestock.exception;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper=false)
 public class EntityNotFoundException extends RuntimeException{
 
     private ErrorCodes errorCodes;

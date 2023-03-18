@@ -16,7 +16,7 @@ import java.time.Instant;
 public class MvtStk extends AbstractEntity{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.AUTO)
     public Integer idmvtstk;
 
     @Column(name = "datemvt")

@@ -15,7 +15,7 @@ import java.util.List;
 public class Category extends  AbstractEntity{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.AUTO)
     public Integer idcategory;
 
     @Column(name = "code")

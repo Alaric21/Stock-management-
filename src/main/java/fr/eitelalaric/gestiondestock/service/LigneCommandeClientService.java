@@ -1,16 +1,17 @@
 package fr.eitelalaric.gestiondestock.service;
 
+import fr.eitelalaric.gestiondestock.dto.LigneCommandeClientDto;
 import fr.eitelalaric.gestiondestock.model.LigneCommandeClient;
 
 import java.util.List;
 
 public interface LigneCommandeClientService {
 
-    LigneCommandeClient save (LigneCommandeClient ligneCommandeClient);
+    LigneCommandeClientDto save (LigneCommandeClientDto ligneCommandeClientDto);
 
-    LigneCommandeClient findById(Integer id);
+    LigneCommandeClientDto findById(Integer id);
 
-    List<LigneCommandeClient> findAll();
+    List<LigneCommandeClientDto> findAll();
 
     void delete(Integer id);
 }

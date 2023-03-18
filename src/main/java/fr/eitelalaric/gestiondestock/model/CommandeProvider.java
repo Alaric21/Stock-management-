@@ -16,7 +16,7 @@ import java.util.List;
 public class CommandeProvider extends AbstractEntity{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.AUTO)
     public Integer idcommandeprovider;
 
     @Column(name = "code")

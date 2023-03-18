@@ -15,7 +15,7 @@ import java.util.List;
 public class Client extends AbstractEntity{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.AUTO)
     public Integer idclient;
 
     @Column(name = "nom")

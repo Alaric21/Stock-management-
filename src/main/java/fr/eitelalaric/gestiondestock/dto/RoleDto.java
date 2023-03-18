@@ -10,7 +10,7 @@ public class RoleDto {
 
     private Integer id;
 
-    private UserDto user;
+    private EmployeeDto user;
 
     private Integer idCompany;
 

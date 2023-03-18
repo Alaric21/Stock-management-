@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class LigneCommandeClient extends AbstractEntity{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.AUTO)
     public Integer idlignecommandeclient;
 
     @ManyToOne

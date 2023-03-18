@@ -16,7 +16,7 @@ import java.util.List;
 public class CommandeClient extends AbstractEntity{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.AUTO)
     public Integer idcommandeclient;
 
     @Column(name = "code")

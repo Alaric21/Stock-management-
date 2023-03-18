@@ -4,6 +4,7 @@ import fr.eitelalaric.gestiondestock.dto.CategoryDto;
 import fr.eitelalaric.gestiondestock.exception.EntityNotFoundException;
 import fr.eitelalaric.gestiondestock.exception.ErrorCodes;
 import fr.eitelalaric.gestiondestock.exception.InvalidEntityException;
+import fr.eitelalaric.gestiondestock.model.Category;
 import fr.eitelalaric.gestiondestock.repository.CategoryRepo;
 import fr.eitelalaric.gestiondestock.service.CategoryService;
 import fr.eitelalaric.gestiondestock.validator.CategoryValidator;
@@ -11,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -32,7 +34,10 @@ public class CategoryServiceImpl implements CategoryService {
             log.error("Category is not valid: {}", categoryDto);
             throw new InvalidEntityException("Category is not valide", ErrorCodes.CATEGORY_NOT_VALID, errors);
         }
-        return CategoryDto.fromEntity(categoryRepo.save(CategoryDto.toEntity(categoryDto)));
+        Category saveCategory = CategoryDto.toEntity(categoryDto);
+        saveCategory.setCreationDate(Instant.now());
+        saveCategory.setLastUpdateDate(Instant.now());
+        return CategoryDto.fromEntity(categoryRepo.save(saveCategory));
     }
 
     @Override
@@ -46,7 +51,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryDto findByCode(String code) {
+    public CategoryDto findCategoryByCode(String code) {
         if (!StringUtils.hasLength(code)) {
             log.error("Category code is null");
             return  null;

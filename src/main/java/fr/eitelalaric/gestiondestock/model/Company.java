@@ -15,7 +15,7 @@ import java.util.List;
 public class Company extends AbstractEntity{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.AUTO)
     public Integer idcompany;
 
     @Column(name = "nom")
@@ -42,7 +42,6 @@ public class Company extends AbstractEntity{
     @Column(name = "steweb")
     private String steWeb;
 
-    @OneToMany
-    @JoinColumn(name = "iduser")
-    private List<User> users;
+    @OneToMany(mappedBy = "company")
+    private List<Employee> employees;
 }

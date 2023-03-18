@@ -11,7 +11,7 @@ public interface CategoryService {
 
     CategoryDto findById(Integer id);
 
-    CategoryDto findByCode(String code);
+    CategoryDto findCategoryByCode(String code);
 
     List<CategoryDto> findAll();
 

@@ -4,7 +4,7 @@ import fr.eitelalaric.gestiondestock.dto.ProductDto;
 
 import java.util.List;
 
-public interface ProductSercie {
+public interface ProductService {
 
      ProductDto save (ProductDto productDto);
 

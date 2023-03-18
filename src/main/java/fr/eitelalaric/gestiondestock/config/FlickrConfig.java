@@ -68,7 +68,7 @@ public class FlickrConfig {
 
         Auth auth = authInterface.checkToken(accessToken);
 
-        // This token can be used until the user revokes it.
+        // This token can be used until the employee revokes it.
         System.out.println("Token: " + accessToken.getToken());
         System.out.println("Secret: " + accessToken.getTokenSecret());
         System.out.println("nsid: " + auth.getUser().getId());

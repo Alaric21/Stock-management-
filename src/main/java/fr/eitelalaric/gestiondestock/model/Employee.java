@@ -12,19 +12,16 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "users")
-public class User extends AbstractEntity{
+@Table(name = "employees")
+public class Employee extends AbstractEntity{
 
     @Id
-    @GeneratedValue
-    public Integer iduser;
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    public Integer idemployee;
 
     @Column(name = "nom")
     private String nom;
 
-    /*@Column(name = "idcompany")
-    private Integer idCompany;
-*/
     @Column(name = "prenom")
     private String prenom;
 
@@ -51,6 +48,6 @@ public class User extends AbstractEntity{
     @JoinColumn(name = "idcompany")
     private Company company;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "employee")
     private List<Role> roles;
 }

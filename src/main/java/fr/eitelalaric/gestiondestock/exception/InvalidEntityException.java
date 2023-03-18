@@ -1,9 +1,11 @@
 package fr.eitelalaric.gestiondestock.exception;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 @Data
+@EqualsAndHashCode(callSuper=false)
 public class InvalidEntityException extends RuntimeException{
 
     private ErrorCodes errorCodes;

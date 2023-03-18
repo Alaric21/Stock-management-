@@ -16,7 +16,7 @@ import java.util.List;
 public class Vente extends AbstractEntity{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.AUTO)
     public Integer idvente;
 
     @Column(name = "idcompany")

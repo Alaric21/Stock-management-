@@ -16,7 +16,7 @@ import java.math.BigDecimal;
 public class LigneVente extends AbstractEntity{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.AUTO)
     public Integer idlignevente;
 
     @Column(name = "idcompany")

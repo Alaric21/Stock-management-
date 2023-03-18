@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class Role extends AbstractEntity{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.AUTO)
     public Integer idrole;
 
     @Column(name = "nom")
@@ -24,6 +24,6 @@ public class Role extends AbstractEntity{
     private Integer idCompany;
 
     @ManyToOne
-    @JoinColumn(name = "idrole",updatable = false,insertable = false)
-    private User user;
+    @JoinColumn(name = "idemployee",updatable = false,insertable = false)
+    private Employee employee;
 }

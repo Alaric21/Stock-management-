@@ -4,24 +4,26 @@ import fr.eitelalaric.gestiondestock.dto.ProductDto;
 import fr.eitelalaric.gestiondestock.exception.EntityNotFoundException;
 import fr.eitelalaric.gestiondestock.exception.ErrorCodes;
 import fr.eitelalaric.gestiondestock.exception.InvalidEntityException;
+import fr.eitelalaric.gestiondestock.model.Product;
 import fr.eitelalaric.gestiondestock.repository.ProductRepository;
-import fr.eitelalaric.gestiondestock.service.ProductSercie;
+import fr.eitelalaric.gestiondestock.service.ProductService;
 import fr.eitelalaric.gestiondestock.validator.ProductValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 @Slf4j
-public class ProductSercieImpl implements ProductSercie {
+public class ProductServiceImpl implements ProductService {
 
     private ProductRepository productRepository;
 
-    public ProductSercieImpl(ProductRepository productRepository) {
+    public ProductServiceImpl(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
@@ -32,7 +34,10 @@ public class ProductSercieImpl implements ProductSercie {
             log.error("Product not valid: {}", productDto);
             throw new InvalidEntityException("Product n'est pas valide", ErrorCodes.ARTICLE_NOT_VALID,errors);
         }
-        return ProductDto.fromEntity(productRepository.save(ProductDto.toEntity(productDto)));
+        Product saveProduct = ProductDto.toEntity(productDto);
+        saveProduct.setCreationDate(Instant.now());
+        saveProduct.setLastUpdateDate(null);
+        return ProductDto.fromEntity(productRepository.save(saveProduct));
     }
 
     @Override

@@ -91,7 +91,7 @@ public class CommandeProviderServiceImpl implements CommandeProviderService {
     }
 
     @Override
-    public CommandeProviderDto findByCode(String code) {
+    public CommandeProviderDto findCommandeProviderByCode(String code) {
         if(!StringUtils.hasLength(code)){
             log.error("Command provider code is null");
             return null;

@@ -1,8 +1,6 @@
 package fr.eitelalaric.gestiondestock.service.impl;
 
 import fr.eitelalaric.gestiondestock.dto.LigneVenteDto;
-import fr.eitelalaric.gestiondestock.dto.ProductDto;
-import fr.eitelalaric.gestiondestock.dto.UserDto;
 import fr.eitelalaric.gestiondestock.dto.VenteDto;
 import fr.eitelalaric.gestiondestock.exception.EntityNotFoundException;
 import fr.eitelalaric.gestiondestock.exception.ErrorCodes;
@@ -100,7 +98,7 @@ public class VenteServiceImpl implements VenteService {
     @Override
     public void delete(Integer id) {
         if (id==null) {
-            log.error("User ID is null");
+            log.error("Employee ID is null");
             return;
         }
         //TODO control befor the delete to ensure that the sale isn't associat to a movement or eslse

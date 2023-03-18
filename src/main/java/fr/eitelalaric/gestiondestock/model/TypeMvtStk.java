@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class TypeMvtStk extends AbstractEntity{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.AUTO)
     public Integer idtypemvtstk;
 
     @Column(name = "idcompany")

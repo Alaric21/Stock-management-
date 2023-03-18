@@ -34,7 +34,7 @@ public class ProductValidator {
         if(productDto.getPrixUnitaireTtc()==null){
             errors.add("Veuillez renseigner le prix unitaire TTC de l'product");
         }
-        if(productDto.getCategory()==null){
+        if(productDto.getCategory().getId()==null){
             errors.add("Veuillez selectioner une categorie");
         }
         return errors;

@@ -17,21 +17,15 @@ public class CompanyDto {
 
     private String description;
 
-    private Adresse adresse;
+    private AdresseDto adresse;
 
     private String codeFiscale;
-
-    private String photo;
 
     private String email;
 
     private String numTel;
 
     private String steWeb;
-
-    private Integer idCompany;
-
-    private List<UserDto> users;
 
     public static CompanyDto fromEntity(Company company) {
         return CompanyDto.builder()
@@ -42,7 +36,6 @@ public class CompanyDto {
                 .codeFiscale(company.getCodeFiscale())
                 .description(company.getDescription())
                 .steWeb(company.getSteWeb())
-                .photo(company.getPhoto())
                 .build();
     }
 
@@ -55,7 +48,6 @@ public class CompanyDto {
                 .email(companyDto.getEmail())
                 .numTel(companyDto.getNumTel())
                 .codeFiscale(companyDto.getCodeFiscale())
-                .photo(companyDto.getPhoto())
                 .build();
     }
 }

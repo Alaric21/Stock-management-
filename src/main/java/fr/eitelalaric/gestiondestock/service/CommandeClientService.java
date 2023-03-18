@@ -1,6 +1,7 @@
 package fr.eitelalaric.gestiondestock.service;
 
 import fr.eitelalaric.gestiondestock.dto.CommandeClientDto;
+import fr.eitelalaric.gestiondestock.dto.CommandeProviderDto;
 
 import java.util.List;
 
@@ -10,9 +11,9 @@ public interface CommandeClientService {
 
     CommandeClientDto findById(Integer id);
 
-    CommandeClientDto findByCode(String code);
-
     List<CommandeClientDto> findAll();
 
     void delete(Integer id);
+
+    CommandeClientDto findCommandeClientByCode(String commandcode);
 }

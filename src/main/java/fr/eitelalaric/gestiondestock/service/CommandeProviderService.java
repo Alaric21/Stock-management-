@@ -10,7 +10,7 @@ public interface CommandeProviderService {
 
     CommandeProviderDto findById(Integer id);
 
-    CommandeProviderDto findByCode(String code);
+    CommandeProviderDto findCommandeProviderByCode(String code);
     List<CommandeProviderDto> findAll();
 
     void delete(Integer id);

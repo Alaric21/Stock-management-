@@ -19,7 +19,6 @@ public class CategoryDto {
 
     private Integer idCompany;
 
-    private List<ProductDto> products;
 
     public  static CategoryDto fromEntity(Category category) {
         return CategoryDto.builder()

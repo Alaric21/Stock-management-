@@ -2,7 +2,7 @@ package fr.eitelalaric.gestiondestock.controller;
 
 import fr.eitelalaric.gestiondestock.controller.api.ProductApi;
 import fr.eitelalaric.gestiondestock.dto.ProductDto;
-import fr.eitelalaric.gestiondestock.service.ProductSercie;
+import fr.eitelalaric.gestiondestock.service.ProductService;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -11,34 +11,34 @@ import java.util.List;
 @RestController
 public class ProductController implements ProductApi {
 
-    private ProductSercie productSercie;
+    private ProductService productService;
 
-    public ProductController(ProductSercie productSercie) {
-        this.productSercie = productSercie;
+    public ProductController(ProductService productService) {
+        this.productService = productService;
     }
 
     @Override
     public ProductDto save(ProductDto productDto) {
-        return productSercie.save(productDto);
+        return productService.save(productDto);
     }
 
     @Override
     public ProductDto findById(Integer idproduct) {
-        return productSercie.findById(idproduct) ;
+        return productService.findById(idproduct) ;
     }
 
     @Override
-    public ProductDto findByProductCode(String codeArticle) {
-        return productSercie.findByProductCode(codeArticle);
+    public ProductDto findByProductCode(String productCode) {
+        return productService.findByProductCode(productCode);
     }
 
     @Override
     public List<ProductDto> findAll() {
-        return productSercie.findAll();
+        return productService.findAll();
     }
 
     @Override
     public void delete(Integer id) {
-        productSercie.delete(id);
+        productService.delete(id);
     }
 }

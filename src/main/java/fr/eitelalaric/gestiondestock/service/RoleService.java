@@ -4,7 +4,7 @@ import fr.eitelalaric.gestiondestock.dto.RoleDto;
 
 import java.util.List;
 
-public interface RolesService {
+public interface RoleService {
 
     RoleDto save (RoleDto roleDto);
 

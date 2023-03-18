@@ -99,7 +99,7 @@ public class CommandeClientServiceImpl implements CommandeClientService {
     }
 
     @Override
-    public CommandeClientDto findByCode(String code) {
+    public CommandeClientDto findCommandeClientByCode(String code) {
         if(!StringUtils.hasLength(code)){
             log.error("Command client code is null");
             return null;
