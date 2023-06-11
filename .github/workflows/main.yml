@@ -1,0 +1,31 @@
+name: build and deploy Stock Management Back-end App
+on:
+  push:
+    branches:
+      -main
+
+jobs:
+  build-deploy:
+    name: Build-deploy Spring Boot Stock Management Back-end App
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository code
+        uses: actions/checkout@v3
+
+      - name: Setup JDK 11
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'corretto'
+          java-version: 11
+
+      - name : Unit test
+        run: mvn -B test --file pom.xml
+
+      - name : Build Application
+        run: |
+          mvn clean
+          mvn -B package --file pom.xml
+
+
+
+
