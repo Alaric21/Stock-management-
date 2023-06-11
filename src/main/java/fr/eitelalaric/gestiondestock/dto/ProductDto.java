@@ -31,7 +31,7 @@ public class ProductDto {
 
     public  static ProductDto fromEntity(Product product) {
         return ProductDto.builder()
-                .id(product.getIdproduct())
+                .id(product.getId())
                 .idCompany(product.getIdCompany())
                 .designation(product.getDesignation())
                 .photo(product.getPhoto())
@@ -44,7 +44,6 @@ public class ProductDto {
 
     public static Product toEntity(ProductDto productDto) {
         return Product.builder()
-                .idproduct(productDto.getId())
                 .idCompany(productDto.getIdCompany())
                 .designation(productDto.getDesignation())
                 .photo(productDto.getPhoto())

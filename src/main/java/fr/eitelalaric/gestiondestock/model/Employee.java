@@ -15,10 +15,6 @@ import java.util.List;
 @Table(name = "employees")
 public class Employee extends AbstractEntity{
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    public Integer idemployee;
-
     @Column(name = "nom")
     private String nom;
 
@@ -44,8 +40,8 @@ public class Employee extends AbstractEntity{
     @Column(name = "numTel")
     private String numTel;
 
-    @ManyToOne
-    @JoinColumn(name = "idcompany")
+    @ManyToOne(cascade = CascadeType.ALL )
+    @JoinColumn(name = "idcompany" )
     private Company company;
 
     @OneToMany(mappedBy = "employee")

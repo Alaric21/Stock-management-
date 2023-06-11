@@ -1,22 +1,25 @@
 package fr.eitelalaric.gestiondestock.service.impl;
 
 import fr.eitelalaric.gestiondestock.dto.LigneVenteDto;
+import fr.eitelalaric.gestiondestock.dto.MvtStkDto;
+import fr.eitelalaric.gestiondestock.dto.ProductDto;
 import fr.eitelalaric.gestiondestock.dto.VenteDto;
 import fr.eitelalaric.gestiondestock.exception.EntityNotFoundException;
 import fr.eitelalaric.gestiondestock.exception.ErrorCodes;
 import fr.eitelalaric.gestiondestock.exception.InvalidEntityException;
-import fr.eitelalaric.gestiondestock.model.LigneVente;
-import fr.eitelalaric.gestiondestock.model.Product;
-import fr.eitelalaric.gestiondestock.model.Vente;
+import fr.eitelalaric.gestiondestock.exception.InvalidOperationException;
+import fr.eitelalaric.gestiondestock.model.*;
 import fr.eitelalaric.gestiondestock.repository.LigneVenteRepository;
 import fr.eitelalaric.gestiondestock.repository.ProductRepository;
 import fr.eitelalaric.gestiondestock.repository.VenteRepository;
+import fr.eitelalaric.gestiondestock.service.MvtStkService;
 import fr.eitelalaric.gestiondestock.service.VenteService;
 import fr.eitelalaric.gestiondestock.validator.VenteValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,16 +29,18 @@ import java.util.stream.Collectors;
 @Slf4j
 public class VenteServiceImpl implements VenteService {
 
-    private VenteRepository venteRepository;
+    private final VenteRepository venteRepository;
 
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
-    private LigneVenteRepository ligneVenteRepository;
+    private final LigneVenteRepository ligneVenteRepository;
+    private final MvtStkService mvtStkService;
 
-    public VenteServiceImpl(VenteRepository venteRepository, ProductRepository productRepository, LigneVenteRepository ligneVenteRepository) {
+    public VenteServiceImpl(VenteRepository venteRepository, ProductRepository productRepository, LigneVenteRepository ligneVenteRepository, MvtStkService mvtStkService) {
         this.venteRepository = venteRepository;
         this.productRepository = productRepository;
         this.ligneVenteRepository = ligneVenteRepository;
+        this.mvtStkService = mvtStkService;
     }
 
     @Override
@@ -62,6 +67,7 @@ public class VenteServiceImpl implements VenteService {
             LigneVente ligneVente = LigneVenteDto.toEntity(ligneVenteDto);
             ligneVente.setVente(savevente);
             ligneVenteRepository.save(ligneVente);
+            updateMvtStk(ligneVente);
         });
         return VenteDto.fromEntity(savevente);
     }
@@ -101,7 +107,24 @@ public class VenteServiceImpl implements VenteService {
             log.error("Employee ID is null");
             return;
         }
-        //TODO control befor the delete to ensure that the sale isn't associat to a movement or eslse
+        List<LigneVente> ligneVentes = ligneVenteRepository.findAllByVenteId(id);
+        if (ligneVentes.isEmpty()){
+            throw new InvalidOperationException("Impossible de supprimer une vente avec des commandes",
+                    ErrorCodes.VENTE_ALREADY_IN_USE);
+        }
         venteRepository.deleteById(id);
+    }
+    private void updateMvtStk(LigneVente ligneVente) {
+
+            MvtStkDto mvtStkDto = MvtStkDto.builder()
+                    .dateMvt(Instant.now())
+                    .typeMvtStk(TypeMvtStk.SORTIE)
+                    .product(ProductDto.fromEntity(ligneVente.getProduct()))
+                    .sourceMvtStk(SourceMvtStk.VENTE)
+                    .quantite(ligneVente.getQuantite())
+                    .idCompany(ligneVente.getIdCompany())
+                    .build();
+            mvtStkService.sortieStock(mvtStkDto);
+
     }
 }

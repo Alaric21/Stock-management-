@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 public class ClientController implements ClientApi {
 
-    private ClientService clientService;
+    private final ClientService clientService;
 
     public ClientController(ClientService clientService) {
         this.clientService = clientService;

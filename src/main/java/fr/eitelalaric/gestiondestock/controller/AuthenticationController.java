@@ -1,7 +1,7 @@
 package fr.eitelalaric.gestiondestock.controller;
 
-import fr.eitelalaric.gestiondestock.auth.AuthenticationRequest;
-import fr.eitelalaric.gestiondestock.auth.AuthenticationResponse;
+import fr.eitelalaric.gestiondestock.dto.auth.AuthenticationRequest;
+import fr.eitelalaric.gestiondestock.dto.auth.AuthenticationResponse;
 import fr.eitelalaric.gestiondestock.service.auth.AuthenticationUserService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.MediaType;

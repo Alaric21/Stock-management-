@@ -12,24 +12,27 @@ public class ProviderValidator {
         List<String> errors = new ArrayList<>();
 
         if(providerDto == null){
-            errors.add("Veuillez renseigner le nom du client");
-            errors.add("Veuillez renseigner le prenom du client");
-            errors.add("Veuillez renseigner l'email du client");
-            errors.add("Veuillez renseigner le numero de telephone du client");
+            errors.add("Veuillez renseigner le nom du provider");
+            errors.add("Veuillez renseigner le prenom du provider");
+            errors.add("Veuillez renseigner l'email du provider");
+            errors.add("Veuillez renseigner le numero de telephone du provider");
+            errors.addAll(AdresseVadator.validate(null));
+
             return errors;
         }
         if(!StringUtils.hasLength(providerDto.getNom())){
-            errors.add("Veuillez renseigner le nom du client");
+            errors.add("Veuillez renseigner le nom du provider");
         }
         if(!StringUtils.hasLength(providerDto.getPrenom())){
-            errors.add("Veuillez renseigner le prenom du client");
+            errors.add("Veuillez renseigner le prenom du provider");
         }
         if(!StringUtils.hasLength(providerDto.getEmail())){
-            errors.add("Veuillez renseigner l'email du client");
+            errors.add("Veuillez renseigner l'email du provider");
         }
         if(!StringUtils.hasLength(providerDto.getNumTel())){
-            errors.add("Veuillez renseigner le numero de telephone du client");
+            errors.add("Veuillez renseigner le numero de telephone du provider");
         }
+        errors.addAll(AdresseVadator.validate(providerDto.getAdresse()));
 
         return errors;
     }

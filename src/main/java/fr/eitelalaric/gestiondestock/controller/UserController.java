@@ -11,7 +11,7 @@ import java.util.List;
 @RestController
 public class UserController implements UserApi {
 
-    private EmployeeService employeeService;
+    private final EmployeeService employeeService;
 
     public UserController(EmployeeService employeeService) {
         this.employeeService = employeeService;

@@ -22,7 +22,7 @@ public class CategoryDto {
 
     public  static CategoryDto fromEntity(Category category) {
         return CategoryDto.builder()
-                .id(category.getIdcategory())
+                .id(category.getId())
                 .code(category.getCode())
                 .designation(category.getDesignation())
                 .idCompany(category.getIdCompany())
@@ -31,7 +31,6 @@ public class CategoryDto {
 
     public static Category toEntity(CategoryDto categoryDto) {
         return Category.builder()
-                .idcategory(categoryDto.getId())
                 .code(categoryDto.getCode())
                 .designation(categoryDto.getDesignation())
                 .idCompany(categoryDto.getIdCompany())

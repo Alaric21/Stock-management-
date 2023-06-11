@@ -4,8 +4,11 @@ import fr.eitelalaric.gestiondestock.dto.CategoryDto;
 import fr.eitelalaric.gestiondestock.exception.EntityNotFoundException;
 import fr.eitelalaric.gestiondestock.exception.ErrorCodes;
 import fr.eitelalaric.gestiondestock.exception.InvalidEntityException;
+import fr.eitelalaric.gestiondestock.exception.InvalidOperationException;
 import fr.eitelalaric.gestiondestock.model.Category;
+import fr.eitelalaric.gestiondestock.model.Product;
 import fr.eitelalaric.gestiondestock.repository.CategoryRepo;
+import fr.eitelalaric.gestiondestock.repository.ProductRepository;
 import fr.eitelalaric.gestiondestock.service.CategoryService;
 import fr.eitelalaric.gestiondestock.validator.CategoryValidator;
 import lombok.extern.slf4j.Slf4j;
@@ -14,17 +17,19 @@ import org.springframework.util.StringUtils;
 
 import java.time.Instant;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 @Slf4j
 public class CategoryServiceImpl implements CategoryService {
 
-    private CategoryRepo categoryRepo;
+    private final CategoryRepo categoryRepo;
 
-    public CategoryServiceImpl(CategoryRepo categoryRepo) {
+    private final ProductRepository productRepository;
+
+    public CategoryServiceImpl(CategoryRepo categoryRepo, ProductRepository productRepository) {
         this.categoryRepo = categoryRepo;
+        this.productRepository = productRepository;
     }
 
     @Override
@@ -72,6 +77,12 @@ public class CategoryServiceImpl implements CategoryService {
         if ( id == null) {
             log.error("Category id is null");
             return;
+        }
+        List<Product> products = productRepository.findAllByCategoryId(id);
+
+        if (products.isEmpty()) {
+            throw new InvalidOperationException("Impossible de supprimer de supprimer cette category",
+                    ErrorCodes.CATEGORY_ALREADY_IN_USE);
         }
         categoryRepo.deleteById(id);
     }

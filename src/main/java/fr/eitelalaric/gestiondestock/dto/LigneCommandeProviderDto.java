@@ -20,14 +20,13 @@ public class LigneCommandeProviderDto {
 
     public  static LigneCommandeProviderDto fromEntity(LigneCommandeProvider ligneCommandeProvider) {
         return LigneCommandeProviderDto.builder()
-                .id(ligneCommandeProvider.getIdlignecommandeprovider())
+                .id(ligneCommandeProvider.getId())
                 .idCompany(ligneCommandeProvider.getIdCompany())
                 .build();
     }
 
     public static LigneCommandeProvider toEntity(LigneCommandeProviderDto ligneCommandeProviderDto) {
         return LigneCommandeProvider.builder()
-                .idlignecommandeprovider(ligneCommandeProviderDto.getId())
                 .idCompany(ligneCommandeProviderDto.getIdCompany())
                 .build();
     }

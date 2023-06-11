@@ -1,5 +1,6 @@
 package fr.eitelalaric.gestiondestock.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import fr.eitelalaric.gestiondestock.model.*;
 import lombok.Builder;
 import lombok.Data;
@@ -21,7 +22,7 @@ public class EmployeeDto {
 
     private String motDePasse;
 
-    private Adresse adresse;
+    private AdresseDto adresse;
 
     private String photo;
 
@@ -29,39 +30,37 @@ public class EmployeeDto {
 
     private String numTel;
 
+    @JsonIgnore
     private CompanyDto company;
 
     private List<RoleDto> roles;
 
-    private Integer idCompany;
-
     public  static EmployeeDto fromEntity(Employee employee) {
         return EmployeeDto.builder()
-                .id(employee.getIdemployee())
+                .id(employee.getId())
                 .prenom(employee.getPrenom())
                 .nom(employee.getNom())
                 .email(employee.getEmail())
                 .numTel(employee.getNumTel())
-                //.idCompany(employee.getIdCompany())
                 .dateDeNaissance(employee.getDateDeNaissance())
                 .motDePasse(employee.getMotDePasse())
                 .photo(employee.getPhoto())
-                .adresse(employee.getAdresse())
+                .adresse(AdresseDto.fromEntity(employee.getAdresse()))
+                .company(CompanyDto.fromEntity(employee.getCompany()))
                 .build();
     }
 
     public static Employee toEntity(EmployeeDto employeeDto) {
         return Employee.builder()
-                .idemployee(employeeDto.getId())
                 .prenom(employeeDto.getPrenom())
                 .nom(employeeDto.getNom())
                 .email(employeeDto.getEmail())
                 .numTel(employeeDto.getNumTel())
-               // .idCompany(employeeDto.getIdCompany())
                 .dateDeNaissance(employeeDto.getDateDeNaissance())
                 .motDePasse(employeeDto.getMotDePasse())
                 .photo(employeeDto.getPhoto())
-                .adresse(employeeDto.getAdresse())
+                .adresse(AdresseDto.toEntity(employeeDto.getAdresse()))
+                .company(CompanyDto.toEntity(employeeDto.getCompany()))
                 .build();
     }
 }

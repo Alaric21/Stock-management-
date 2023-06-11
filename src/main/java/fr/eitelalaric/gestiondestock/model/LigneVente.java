@@ -15,10 +15,6 @@ import java.math.BigDecimal;
 @Table(name = "lignevente")
 public class LigneVente extends AbstractEntity{
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    public Integer idlignevente;
-
     @Column(name = "idcompany")
     private Integer idCompany;
 

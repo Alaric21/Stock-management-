@@ -4,8 +4,12 @@ import fr.eitelalaric.gestiondestock.dto.ProductDto;
 import fr.eitelalaric.gestiondestock.exception.EntityNotFoundException;
 import fr.eitelalaric.gestiondestock.exception.ErrorCodes;
 import fr.eitelalaric.gestiondestock.exception.InvalidEntityException;
+import fr.eitelalaric.gestiondestock.exception.InvalidOperationException;
+import fr.eitelalaric.gestiondestock.model.LigneCommandeClient;
+import fr.eitelalaric.gestiondestock.model.LigneCommandeProvider;
+import fr.eitelalaric.gestiondestock.model.LigneVente;
 import fr.eitelalaric.gestiondestock.model.Product;
-import fr.eitelalaric.gestiondestock.repository.ProductRepository;
+import fr.eitelalaric.gestiondestock.repository.*;
 import fr.eitelalaric.gestiondestock.service.ProductService;
 import fr.eitelalaric.gestiondestock.validator.ProductValidator;
 import lombok.extern.slf4j.Slf4j;
@@ -21,10 +25,16 @@ import java.util.stream.Collectors;
 @Slf4j
 public class ProductServiceImpl implements ProductService {
 
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
+    private final LigneCommandeClientRepository ligneCommandeClientRepository;
+    private final LigneVenteRepository ligneVenteRepository;
+    private final LigneCommandProviderRepository ligneCommandProviderRepository;
 
-    public ProductServiceImpl(ProductRepository productRepository) {
+    public ProductServiceImpl(ProductRepository productRepository , LigneCommandeClientRepository ligneCommandeClientRepository, LigneVenteRepository ligneVenteRepository, VenteRepository venteRepository, LigneCommandProviderRepository ligneCommandProviderRepository) {
         this.productRepository = productRepository;
+        this.ligneCommandeClientRepository = ligneCommandeClientRepository;
+        this.ligneVenteRepository = ligneVenteRepository;
+        this.ligneCommandProviderRepository = ligneCommandProviderRepository;
     }
 
     @Override
@@ -75,6 +85,24 @@ public class ProductServiceImpl implements ProductService {
         if (id == null) {
             log.error("Product ID is null");
             return;
+        }
+
+        List<LigneCommandeClient> ligneCommandeClients = ligneCommandeClientRepository.findAllByProductId(id);
+        if (ligneCommandeClients.isEmpty()) {
+            throw new InvalidOperationException("Impossible de supprimer un product deja utilise dans des commandes client",
+                    ErrorCodes.ARTICLE_ALREADY_IN_USED);
+        }
+        List<LigneCommandeProvider> ligneCommandeProviders = ligneCommandProviderRepository.findAllByProductId(id);
+
+        if (ligneCommandeProviders.isEmpty()) {
+            throw new InvalidOperationException("Impossible de supprimer un product deja utilise dans des commandes provider",
+                    ErrorCodes.ARTICLE_ALREADY_IN_USED);
+        }
+        List<LigneVente> ligneVentes = ligneVenteRepository.findAllByProductId(id);
+
+        if (ligneVentes.isEmpty()) {
+            throw new InvalidOperationException("Impossible de supprimer un product deja utilise dans des ventes",
+                    ErrorCodes.ARTICLE_ALREADY_IN_USED);
         }
         productRepository.deleteById(id);
     }

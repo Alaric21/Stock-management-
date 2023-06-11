@@ -1,7 +1,6 @@
 package fr.eitelalaric.gestiondestock.controller.api;
 
 import fr.eitelalaric.gestiondestock.dto.CompanyDto;
-import fr.eitelalaric.gestiondestock.dto.EmployeeDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -23,7 +22,7 @@ public interface CompanyApi {
                     content = { @Content(mediaType = "application/json", schema = @Schema(implementation = CompanyDto.class))}),
             @ApiResponse(responseCode= "400", description = "The object company is not valid")
     })
-    EmployeeDto save (@RequestBody CompanyDto companyDto);
+    CompanyDto save (@RequestBody CompanyDto companyDto);
 
     @GetMapping(value = APP_ROOT+"/company/{idcompany}",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "search company", description = "This method allows to search a company by ID ", tags= "Company")

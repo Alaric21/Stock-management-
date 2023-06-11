@@ -1,4 +1,4 @@
-package fr.eitelalaric.gestiondestock.auth;
+package fr.eitelalaric.gestiondestock.dto.auth;
 
 import fr.eitelalaric.gestiondestock.model.Adresse;
 import fr.eitelalaric.gestiondestock.model.Company;

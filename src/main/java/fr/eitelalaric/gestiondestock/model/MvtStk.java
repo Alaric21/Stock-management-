@@ -15,10 +15,6 @@ import java.time.Instant;
 @Table(name = "mvtstk")
 public class MvtStk extends AbstractEntity{
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    public Integer idmvtstk;
-
     @Column(name = "datemvt")
     private Instant dateMvt;
 
@@ -27,6 +23,9 @@ public class MvtStk extends AbstractEntity{
 
     @Column(name = "typemvtstk")
     private TypeMvtStk typeMvtStk;
+
+    @Column(name = "sourcemvt")
+    private SourceMvtStk sourceMvtStk;
 
     @Column(name = "idcompany")
     private Integer idCompany;

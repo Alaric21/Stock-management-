@@ -25,7 +25,7 @@ public class VenteDto {
 
     public  static VenteDto fromEntity(Vente vente) {
         return VenteDto.builder()
-                .id(vente.getIdvente())
+                .id(vente.getId())
                 .idCompany(vente.getIdCompany())
                 .code(vente.getCode())
                 .build();
@@ -33,7 +33,6 @@ public class VenteDto {
 
     public static Vente toEntity(VenteDto venteDto) {
         return Vente.builder()
-                .idvente(venteDto.getId())
                 .idCompany(venteDto.getIdCompany())
                 .code(venteDto.getCode())
                 .build();

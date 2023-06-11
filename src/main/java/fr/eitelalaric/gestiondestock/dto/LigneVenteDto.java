@@ -22,7 +22,7 @@ public class LigneVenteDto {
 
     public  static LigneVenteDto fromEntity(LigneVente ligneVente) {
         return LigneVenteDto.builder()
-                .id(ligneVente.getIdlignevente())
+                .id(ligneVente.getId())
                 .idCompany(ligneVente.getIdCompany())
                 .quantite(ligneVente.getQuantite())
                 .build();
@@ -30,7 +30,6 @@ public class LigneVenteDto {
 
     public static LigneVente toEntity(LigneVenteDto ligneVenteDto) {
         return LigneVente.builder()
-                .idlignevente(ligneVenteDto.getId())
                 .idCompany(ligneVenteDto.getIdCompany())
                 .quantite(ligneVenteDto.getQuantite())
                 .build();

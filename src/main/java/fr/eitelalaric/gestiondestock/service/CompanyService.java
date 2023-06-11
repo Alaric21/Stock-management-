@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface CompanyService {
 
-    EmployeeDto save (CompanyDto companyDto);
+    CompanyDto save (CompanyDto companyDto);
 
     CompanyDto findById(Integer id);
 

@@ -11,34 +11,34 @@ import java.util.List;
 @RestController
 public class CategoryController implements CategoryApi {
 
-    private CategoryService  categorySercie;
+    private final CategoryService categoryService;
 
-    public CategoryController(CategoryService categorySercie) {
-        this.categorySercie = categorySercie;
+    public CategoryController(CategoryService categoryService) {
+        this.categoryService = categoryService;
     }
 
     @Override
     public CategoryDto save(CategoryDto categoryDto) {
-        return categorySercie.save(categoryDto);
+        return categoryService.save(categoryDto);
     }
 
     @Override
     public CategoryDto findById(Integer idcategory) {
-        return categorySercie.findById(idcategory) ;
+        return categoryService.findById(idcategory) ;
     }
 
     @Override
     public CategoryDto findCategoryByCategoryCode(String categoryCode) {
-        return categorySercie.findCategoryByCode(categoryCode);
+        return categoryService.findCategoryByCode(categoryCode);
     }
 
     @Override
     public List<CategoryDto> findAll() {
-        return categorySercie.findAll();
+        return categoryService.findAll();
     }
 
     @Override
     public void delete(Integer id) {
-        categorySercie.delete(id);
+        categoryService.delete(id);
     }
 }

@@ -14,10 +14,6 @@ import java.util.List;
 @Table(name = "category")
 public class Category extends  AbstractEntity{
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    public Integer idcategory;
-
     @Column(name = "code")
     private String code;
 

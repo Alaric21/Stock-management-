@@ -17,7 +17,7 @@ public class ClientDto {
 
     private String prenom;
 
-    private Adresse adresse;
+    private AdresseDto adresse;
 
     private String photo;
 
@@ -31,27 +31,24 @@ public class ClientDto {
 
     public  static ClientDto fromEntity(Client client) {
         return ClientDto.builder()
-                .id(client.getIdclient())
+                .id(client.getId())
                 .nom(client.getNom())
                 .idCompany(client.getIdCompany())
                 .prenom(client.getPrenom())
                 .email(client.getEmail())
                 .photo(client.getPhoto())
                 .numTel(client.getNumTel())
-                .adresse(client.getAdresse())
                 .build();
     }
 
     public static Client toEntity(ClientDto clientDto) {
         return Client.builder()
-                .idclient(clientDto.getId())
                 .idCompany(clientDto.getIdCompany())
                 .photo(clientDto.getPhoto())
                 .prenom(clientDto.getPrenom())
                 .nom(clientDto.getNom())
                 .email(clientDto.getEmail())
                 .numTel(clientDto.getNumTel())
-                .adresse(clientDto.getAdresse())
                 .build();
     }
 }

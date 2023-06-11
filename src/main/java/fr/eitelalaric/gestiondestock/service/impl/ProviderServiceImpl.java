@@ -1,11 +1,12 @@
 package fr.eitelalaric.gestiondestock.service.impl;
 
-import fr.eitelalaric.gestiondestock.dto.ClientDto;
 import fr.eitelalaric.gestiondestock.dto.ProviderDto;
 import fr.eitelalaric.gestiondestock.exception.EntityNotFoundException;
 import fr.eitelalaric.gestiondestock.exception.ErrorCodes;
 import fr.eitelalaric.gestiondestock.exception.InvalidEntityException;
-import fr.eitelalaric.gestiondestock.model.Provider;
+import fr.eitelalaric.gestiondestock.exception.InvalidOperationException;
+import fr.eitelalaric.gestiondestock.model.CommandeProvider;
+import fr.eitelalaric.gestiondestock.repository.CommandProviderRepository;
 import fr.eitelalaric.gestiondestock.repository.ProviderRepository;
 import fr.eitelalaric.gestiondestock.service.ProviderService;
 import fr.eitelalaric.gestiondestock.validator.ProviderValidator;
@@ -19,10 +20,13 @@ import java.util.stream.Collectors;
 @Service
 public class ProviderServiceImpl implements ProviderService {
 
-    private ProviderRepository providerRepository;
+    private final ProviderRepository providerRepository;
 
-    public ProviderServiceImpl(ProviderRepository providerRepository) {
+    private final CommandProviderRepository commandProviderRepository;
+
+    public ProviderServiceImpl(ProviderRepository providerRepository, CommandProviderRepository commandProviderRepository) {
         this.providerRepository = providerRepository;
+        this.commandProviderRepository = commandProviderRepository;
     }
 
     @Override
@@ -59,7 +63,12 @@ public class ProviderServiceImpl implements ProviderService {
             log.error("Provider ID is null");
             return;
         }
-        //TODO befor to delete check if there is command associat to the provider
+        List<CommandeProvider> commandeProviders = commandProviderRepository.findAllByProviderId(id);
+
+        if (commandeProviders.isEmpty()){
+            throw new InvalidOperationException("Impossible de supprimer un provider qui a deja des commandes",
+                    ErrorCodes.PROVIDER_ALREADY_IN_USE);
+        }
         providerRepository.deleteById(id);
     }
 }

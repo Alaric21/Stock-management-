@@ -14,10 +14,6 @@ import java.util.List;
 @Table(name = "company")
 public class Company extends AbstractEntity{
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    public Integer idcompany;
-
     @Column(name = "nom")
     private String nom;
 

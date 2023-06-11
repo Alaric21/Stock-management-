@@ -1,6 +1,6 @@
 package fr.eitelalaric.gestiondestock.service.auth;
 
-import fr.eitelalaric.gestiondestock.auth.UserPrincipal;
+import fr.eitelalaric.gestiondestock.dto.auth.UserPrincipal;
 import fr.eitelalaric.gestiondestock.model.Employee;
 import fr.eitelalaric.gestiondestock.repository.EmployeeRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -30,7 +30,7 @@ public class ApplicationUserService implements UserDetailsService {
                 ()->new BadCredentialsException("check your username or your password"));
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
         employee.getRoles().forEach(role -> authorities.add(new SimpleGrantedAuthority(role.getNom())));
-        return new UserPrincipal(employee.getEmail(), employee.getMotDePasse(),authorities, employee.getCompany().getIdcompany());
+        return new UserPrincipal(employee.getEmail(), employee.getMotDePasse(),authorities, employee.getCompany().getId());
     }
 
 }

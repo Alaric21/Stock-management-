@@ -4,7 +4,10 @@ import fr.eitelalaric.gestiondestock.dto.ClientDto;
 import fr.eitelalaric.gestiondestock.exception.EntityNotFoundException;
 import fr.eitelalaric.gestiondestock.exception.ErrorCodes;
 import fr.eitelalaric.gestiondestock.exception.InvalidEntityException;
+import fr.eitelalaric.gestiondestock.exception.InvalidOperationException;
+import fr.eitelalaric.gestiondestock.model.CommandeClient;
 import fr.eitelalaric.gestiondestock.repository.ClientRepository;
+import fr.eitelalaric.gestiondestock.repository.CommandeClientRepository;
 import fr.eitelalaric.gestiondestock.service.ClientService;
 import fr.eitelalaric.gestiondestock.validator.ClientValidator;
 import lombok.extern.slf4j.Slf4j;
@@ -17,10 +20,12 @@ import java.util.stream.Collectors;
 @Service
 public class ClientServiceImpl implements ClientService {
 
-    private ClientRepository clientRepository;
+    private final ClientRepository clientRepository;
+    private final CommandeClientRepository commandeClientRepository;
 
-    public ClientServiceImpl(ClientRepository clientRepository) {
+    public ClientServiceImpl(ClientRepository clientRepository, CommandeClientRepository commandeClientRepository) {
         this.clientRepository = clientRepository;
+        this.commandeClientRepository = commandeClientRepository;
     }
 
     @Override
@@ -57,6 +62,12 @@ public class ClientServiceImpl implements ClientService {
         if (id==null) {
             log.error("Client ID is null");
             return;
+        }
+        List<CommandeClient> commandeClients = commandeClientRepository.findAllByClientId(id);
+
+        if (commandeClients.isEmpty()){
+            throw new InvalidOperationException("Impossible de supprimer de supprimer un client qui a deja des commandes",
+                    ErrorCodes.CLIENT_ALREADY_IN_USE);
         }
         clientRepository.deleteById(id);
     }

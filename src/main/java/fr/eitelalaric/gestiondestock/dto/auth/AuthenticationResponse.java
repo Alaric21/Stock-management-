@@ -1,4 +1,4 @@
-package fr.eitelalaric.gestiondestock.auth;
+package fr.eitelalaric.gestiondestock.dto.auth;
 
 import lombok.Builder;
 import lombok.Data;

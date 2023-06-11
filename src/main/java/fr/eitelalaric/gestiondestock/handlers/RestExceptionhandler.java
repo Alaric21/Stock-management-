@@ -3,6 +3,7 @@ package fr.eitelalaric.gestiondestock.handlers;
 import fr.eitelalaric.gestiondestock.exception.EntityNotFoundException;
 import fr.eitelalaric.gestiondestock.exception.ErrorCodes;
 import fr.eitelalaric.gestiondestock.exception.InvalidEntityException;
+import fr.eitelalaric.gestiondestock.exception.InvalidOperationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -27,7 +28,6 @@ public class RestExceptionhandler extends ResponseEntityExceptionHandler {
                 HttpStatus.NOT_FOUND
         );
     }
-
     @ExceptionHandler(InvalidEntityException.class)
     public ResponseEntity<ErrorDto> handleException(InvalidEntityException exception, WebRequest webRequest) {
         return new ResponseEntity<>(
@@ -38,6 +38,17 @@ public class RestExceptionhandler extends ResponseEntityExceptionHandler {
                         .errors(exception.getErrors())
                         .build(),
                 HttpStatus.BAD_REQUEST
+        );
+    }
+ @ExceptionHandler(InvalidOperationException.class)
+    public ResponseEntity<ErrorDto> handleException(InvalidOperationException exception, WebRequest webRequest) {
+        return new ResponseEntity<>(
+                ErrorDto.builder()
+                        .code(exception.getErrorCodes())
+                        .httpCode(HttpStatus.NOT_FOUND.value())
+                        .message(exception.getMessage())
+                        .build(),
+                HttpStatus.NOT_FOUND
         );
     }
 

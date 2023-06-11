@@ -13,10 +13,12 @@ public class EmployeeValidator {
 
         if (employeeDto ==null) {
             errors.add("Veuillez renseigner le nom de l'employee ");
-            //errors.add("Veuillez renseigner le prenom de l'employee ");
+            errors.add("Veuillez renseigner le prenom de l'employee ");
             errors.add("Veuillez renseigner l'email de l'employee ");
             errors.add("Veuillez renseigner le mot de passe de l'employee ");
             errors.add("Veuillez renseigner l'adresse de l'employee ");
+            //errors.add("Veuillez renseigner la date de naissance ");
+            errors.addAll(AdresseVadator.validate(null));
             return errors;
         }
         if(!StringUtils.hasLength(employeeDto.getNom())){
@@ -28,29 +30,11 @@ public class EmployeeValidator {
         if(!StringUtils.hasLength(employeeDto.getMotDePasse())){
             errors.add("Veuillez renseigner le mot de passe de l'employee ");
         }
-        /*if(!StringUtils.hasLength(employeeDto.getNom())){
-            errors.add("Veuillez renseigner le nom de l'employee ");
+       /* if(!StringUtils.hasLength(employeeDto.getDateDeNaissance().toString())){
+            errors.add("Veuillez renseigner la date de naissance ");
         }
-        if(employeeDto.getDateDeNaissance()==null){
-            errors.add("Veuillez renseigner la date de naissance de l'employee ");
-        }*/
-        if(employeeDto.getAdresse()== null){
-            errors.add("Veuillez renseigner l'adresse de l'employee ");
-        }else {
-            if(!StringUtils.hasLength(employeeDto.getAdresse().getAdresse1())){
-                errors.add("Le champ 'adresse1' est obligatoir ");
-            }
-            if(!StringUtils.hasLength(employeeDto.getAdresse().getVille())){
-                errors.add("Le champ 'ville' est obligatoir ");
-            }
-            if(!StringUtils.hasLength(employeeDto.getAdresse().getCodePostale())){
-                errors.add("Le champ 'code postale' est obligatoir ");
-            }
-            if(!StringUtils.hasLength(employeeDto.getAdresse().getPays())){
-                errors.add("Le champ 'pays' est obligatoir ");
-            }
-
-        }
+*/
+        errors.addAll(AdresseVadator.validate(employeeDto.getAdresse()));
 
         return errors;
     }

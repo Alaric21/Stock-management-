@@ -16,14 +16,13 @@ public class RoleDto {
 
     public  static RoleDto fromEntity(Role role) {
         return RoleDto.builder()
-                .id(role.getIdrole())
+                .id(role.getId())
                 .idCompany(role.getIdCompany())
                 .build();
     }
 
     public static Role toEntity(RoleDto roleDto) {
         return Role.builder()
-                .idrole(roleDto.getId())
                 .idCompany(roleDto.getIdCompany())
                 .build();
     }

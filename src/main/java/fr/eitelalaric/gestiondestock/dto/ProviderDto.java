@@ -17,7 +17,7 @@ public class ProviderDto {
 
     private String prenom;
 
-    private Adresse adresse;
+    private AdresseDto adresse;
 
     private String photo;
 
@@ -31,27 +31,24 @@ public class ProviderDto {
 
     public  static ProviderDto fromEntity(Provider provider) {
         return fr.eitelalaric.gestiondestock.dto.ProviderDto.builder()
-                .id(provider.getIdprovider())
+                .id(provider.getId())
                 .nom(provider.getNom())
                 .idCompany(provider.getIdCompany())
                 .prenom(provider.getPrenom())
                 .email(provider.getEmail())
                 .photo(provider.getPhoto())
                 .numTel(provider.getNumTel())
-                .adresse(provider.getAdresse())
                 .build();
     }
 
     public static Provider toEntity(ProviderDto providerDto) {
         return Provider.builder()
-                .idprovider(providerDto.getId())
                 .idCompany(providerDto.getIdCompany())
                 .photo(providerDto.getPhoto())
                 .prenom(providerDto.getPrenom())
                 .nom(providerDto.getNom())
                 .email(providerDto.getEmail())
                 .numTel(providerDto.getNumTel())
-                .adresse(providerDto.getAdresse())
                 .build();
     }
 }

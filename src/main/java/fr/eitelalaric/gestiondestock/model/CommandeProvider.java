@@ -15,10 +15,6 @@ import java.util.List;
 @Table(name ="commandeProvider")
 public class CommandeProvider extends AbstractEntity{
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    public Integer idcommandeprovider;
-
     @Column(name = "code")
     private String code;
 
@@ -27,6 +23,9 @@ public class CommandeProvider extends AbstractEntity{
 
     @Column(name = "datecommande")
     private Instant dateCommande;
+
+    @Column(name = "etatcommande")
+    private EtatCommande etatCommande;
 
     @ManyToOne
     @JoinColumn(name = "idprovider")

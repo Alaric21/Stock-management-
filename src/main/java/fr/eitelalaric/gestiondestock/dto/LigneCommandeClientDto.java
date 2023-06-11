@@ -6,6 +6,8 @@ import fr.eitelalaric.gestiondestock.model.Product;
 import lombok.Builder;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @Data
 @Builder
 public class LigneCommandeClientDto {
@@ -14,20 +16,23 @@ public class LigneCommandeClientDto {
 
     private ProductDto product;
 
+    private BigDecimal quantite;
+
     private CommandeClientDto commandeClient;
 
     private Integer idCompany;
 
     public  static LigneCommandeClientDto fromEntity(LigneCommandeClient ligneCommandeClient) {
         return LigneCommandeClientDto.builder()
-                .id(ligneCommandeClient.getIdlignecommandeclient())
+                .quantite(ligneCommandeClient.getQuantite())
+                .id(ligneCommandeClient.getId())
                 .idCompany(ligneCommandeClient.getIdCompany())
                 .build();
     }
 
     public static LigneCommandeClient toEntity(LigneCommandeClientDto ligneCommandeClientDto) {
         return LigneCommandeClient.builder()
-                .idlignecommandeclient(ligneCommandeClientDto.getId())
+                .quantite(ligneCommandeClientDto.getQuantite())
                 .idCompany(ligneCommandeClientDto.getIdCompany())
                 .build();
     }

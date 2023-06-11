@@ -13,10 +13,6 @@ import javax.persistence.*;
 @Table(name = "roles")
 public class Role extends AbstractEntity{
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    public Integer idrole;
-
     @Column(name = "nom")
     private String nom;
 

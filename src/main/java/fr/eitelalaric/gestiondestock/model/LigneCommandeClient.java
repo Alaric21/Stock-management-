@@ -3,6 +3,7 @@ package fr.eitelalaric.gestiondestock.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Data
 @Builder
@@ -13,9 +14,8 @@ import javax.persistence.*;
 @Table(name = "lignecommandeclient")
 public class LigneCommandeClient extends AbstractEntity{
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    public Integer idlignecommandeclient;
+    @JoinColumn(name = "quantite")
+    private BigDecimal quantite;
 
     @ManyToOne
     @JoinColumn(name = "idproduct")

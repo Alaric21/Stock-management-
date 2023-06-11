@@ -1,5 +1,6 @@
 package fr.eitelalaric.gestiondestock.service;
 
+import fr.eitelalaric.gestiondestock.dto.ChangerMotDePasseUtilisateurDto;
 import fr.eitelalaric.gestiondestock.dto.EmployeeDto;
 
 import java.util.List;
@@ -13,4 +14,8 @@ public interface EmployeeService {
     List<EmployeeDto> findAll();
 
     void delete(Integer id);
+
+    EmployeeDto findByEmail(String email);
+
+    EmployeeDto changerMotDePasseEmployee(ChangerMotDePasseUtilisateurDto changerMotDePasseUtilisateurDto);
 }

@@ -15,21 +15,20 @@ import java.util.List;
 @Table(name = "commandeclient")
 public class CommandeClient extends AbstractEntity{
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    public Integer idcommandeclient;
-
     @Column(name = "code")
     private String code;
+
+    @Column(name = "etatcommande")
+    private EtatCommande etatCommande;
 
     @Column(name = "datecommande")
     private Instant dateCommande;
 
     @Column(name = "idcompany")
     private Integer idCompany;
-
+    
     @ManyToOne
-    @JoinColumn(name = "idClient")
+    @JoinColumn(name = "idclient")
     private Client client;
 
     @OneToMany(mappedBy = "commandeClient")

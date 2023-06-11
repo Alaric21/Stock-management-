@@ -1,7 +1,7 @@
 package fr.eitelalaric.gestiondestock.service.auth;
 
-import fr.eitelalaric.gestiondestock.auth.AuthenticationRequest;
-import fr.eitelalaric.gestiondestock.auth.AuthenticationResponse;
+import fr.eitelalaric.gestiondestock.dto.auth.AuthenticationRequest;
+import fr.eitelalaric.gestiondestock.dto.auth.AuthenticationResponse;
 import fr.eitelalaric.gestiondestock.model.Employee;
 import fr.eitelalaric.gestiondestock.utils.JwtUtils;
 import org.springframework.security.authentication.AuthenticationManager;

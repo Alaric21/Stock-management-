@@ -8,8 +8,6 @@ import lombok.Data;
 @Builder
 public class AdresseDto {
 
-    private Integer id;
-
     private String adresse1;
 
     private String adresse2;
@@ -22,26 +20,26 @@ public class AdresseDto {
 
     public static AdresseDto fromEntity(Adresse adresse) {
         if (adresse == null) {
-            //TODO throw new exception
             return null;
         }
         return AdresseDto.builder()
                 .adresse1(adresse.getAdresse1())
                 .adresse2(adresse.getAdresse2())
                 .pays(adresse.getPays())
+                .ville(adresse.getVille())
                 .codePostale(adresse.getCodePostale())
                 .build();
     }
 
     public static Adresse toEntity(AdresseDto adresseDto) {
         if (adresseDto == null) {
-            //TODO throw new exception
             return null;
         }
         return Adresse.builder()
                 .adresse1(adresseDto.getAdresse1())
                 .adresse2(adresseDto.getAdresse2())
                 .pays(adresseDto.getPays())
+                .ville(adresseDto.getVille())
                 .codePostale(adresseDto.getCodePostale())
                 .build();
     }

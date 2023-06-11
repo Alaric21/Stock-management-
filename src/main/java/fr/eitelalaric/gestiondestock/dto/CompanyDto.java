@@ -27,26 +27,30 @@ public class CompanyDto {
 
     private String steWeb;
 
+    private String photo;
+
     public static CompanyDto fromEntity(Company company) {
         return CompanyDto.builder()
-                .id(company.getIdcompany())
+                .id(company.getId())
                 .nom(company.getNom())
                 .numTel(company.getNumTel())
                 .email(company.getEmail())
                 .codeFiscale(company.getCodeFiscale())
                 .description(company.getDescription())
+                .adresse(AdresseDto.fromEntity(company.getAdresse()))
                 .steWeb(company.getSteWeb())
                 .build();
     }
 
     public static Company toEntity(CompanyDto companyDto){
         return Company.builder()
-                .idcompany(companyDto.getId())
                 .codeFiscale(companyDto.getCodeFiscale())
                 .steWeb(companyDto.getSteWeb())
                 .nom(companyDto.getNom())
                 .email(companyDto.getEmail())
+                .adresse(AdresseDto.toEntity(companyDto.getAdresse()))
                 .numTel(companyDto.getNumTel())
+                .description(companyDto.getDescription())
                 .codeFiscale(companyDto.getCodeFiscale())
                 .build();
     }
